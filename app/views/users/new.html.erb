@@ -1,0 +1,46 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full space-y-8">
+    <div>
+      <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+        Create your account
+      </h2>
+    </div>
+    <%= form_with model: @user, url: signup_path, class: "mt-8 space-y-6" do |f| %>
+      <% if @user.errors.any? %>
+        <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+          <ul class="list-disc list-inside">
+            <% @user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="rounded-md shadow-sm space-y-4">
+        <div>
+          <%= f.label :email, "Email address", class: "block text-sm font-medium text-gray-700" %>
+          <%= f.email_field :email, autofocus: true, required: true, class: "mt-1 appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm" %>
+        </div>
+        <div>
+          <%= f.label :password, "Password (minimum 6 characters)", class: "block text-sm font-medium text-gray-700" %>
+          <%= f.password_field :password, required: true, class: "mt-1 appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm" %>
+        </div>
+        <div>
+          <%= f.label :password_confirmation, "Confirm password", class: "block text-sm font-medium text-gray-700" %>
+          <%= f.password_field :password_confirmation, required: true, class: "mt-1 appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm" %>
+        </div>
+      </div>
+
+      <div>
+        <%= f.submit "Create account", class: "group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500" %>
+      </div>
+
+      <div class="text-center">
+        <p class="text-sm text-gray-600">
+          Already have an account?
+          <%= link_to "Sign in", login_path, class: "font-medium text-emerald-600 hover:text-emerald-500" %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+</div>
