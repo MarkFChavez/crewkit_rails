@@ -2,6 +2,11 @@
 
 A desktop-first team management application for independent project managers to track multiple teams across different companies.
 
+## Screenshots
+
+### Waitlist
+![Waitlist Screenshot](docs/waitlist-screenshot.png)
+
 ## Features
 
 ### Core Functionality
