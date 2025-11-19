@@ -2,7 +2,7 @@
   <!-- Header -->
   <div class="flex justify-between items-center">
     <h1 class="text-3xl font-bold text-gray-900">Attendance History</h1>
-    <%= link_to "Quick Entry", attendance_quick_entry_path, class: "bg-emerald-600 text-white px-4 py-2 rounded-md hover:bg-emerald-700 font-medium" %>
+    <%= link_to "Quick Entry", attendance_quick_entry_path, class: "cursor-pointer bg-emerald-600 text-white px-4 py-2 rounded-md hover:bg-emerald-700 font-medium" %>
   </div>
 
   <!-- Team Selection (Required for Performance) -->
@@ -35,7 +35,7 @@
         </div>
 
         <div class="flex items-end">
-          <%= form.submit "View Attendance", class: "w-full bg-gradient-to-r from-emerald-600 to-emerald-500 text-white px-4 py-2 rounded-md hover:from-emerald-700 hover:to-emerald-600 font-medium shadow-md hover:shadow-lg transition-all" %>
+          <%= form.submit "View Attendance", class: "cursor-pointer w-full bg-gradient-to-r from-emerald-600 to-emerald-500 text-white px-4 py-2 rounded-md hover:from-emerald-700 hover:to-emerald-600 font-medium shadow-md hover:shadow-lg transition-all" %>
         </div>
       </div>
     <% end %>
@@ -92,7 +92,7 @@
                     <%= record.record_date.strftime('%b %d, %Y') %>
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                    <%= link_to record.team_member.team.name, team_path(record.team_member.team), class: "text-emerald-600 hover:text-emerald-700" %>
+                    <%= link_to record.team_member.team.name, team_path(record.team_member.team), class: "cursor-pointer text-emerald-600 hover:text-emerald-700" %>
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><%= record.team_member.name %></td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600"><%= record.team_member.role %></td>
@@ -113,7 +113,7 @@
                     <% end %>
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                    <%= link_to "Edit", edit_attendance_record_path(record), class: "text-emerald-600 hover:text-emerald-700 mr-2" %>
+                    <%= link_to "Edit", edit_attendance_record_path(record), class: "cursor-pointer text-emerald-600 hover:text-emerald-700 mr-2" %>
                   </td>
                 </tr>
               <% end %>
@@ -123,7 +123,7 @@
         <% else %>
           <div class="text-center py-12">
             <p class="text-gray-500 text-lg mb-4">No attendance records found for the selected filters</p>
-            <%= link_to "Go to Quick Entry", attendance_quick_entry_path, class: "text-emerald-600 hover:text-emerald-700 font-medium" %>
+            <%= link_to "Go to Quick Entry", attendance_quick_entry_path, class: "cursor-pointer text-emerald-600 hover:text-emerald-700 font-medium" %>
           </div>
         <% end %>
       </div>

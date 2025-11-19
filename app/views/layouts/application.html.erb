@@ -27,7 +27,7 @@
           <div class="flex justify-between items-center h-16">
             <!-- Logo -->
             <div class="flex items-center">
-              <%= link_to root_path, class: "text-lg md:text-xl font-bold bg-gradient-to-r from-emerald-600 to-emerald-500 bg-clip-text text-transparent hover:from-emerald-700 hover:to-emerald-600 transition-all duration-300" do %>
+              <%= link_to root_path, class: "cursor-pointer text-lg md:text-xl font-bold bg-gradient-to-r from-emerald-600 to-emerald-500 bg-clip-text text-transparent hover:from-emerald-700 hover:to-emerald-600 transition-all duration-300" do %>
                 <span class="hidden sm:inline">CrewKit</span>
                 <span class="sm:hidden">CK</span>
               <% end %>
@@ -36,10 +36,10 @@
             <!-- Desktop Navigation Links -->
             <div class="hidden lg:flex space-x-1">
               <% current_page = request.path %>
-              <%= link_to "Dashboard", dashboard_path, class: "#{current_page.start_with?('/dashboard') || current_page == '/' ? 'text-emerald-600 border-b-2 border-emerald-600' : 'text-gray-700 hover:text-emerald-600 hover:bg-emerald-50'} px-4 py-2 rounded-t-lg transition-all duration-200 font-medium" %>
-              <%= link_to "Teams", teams_path, class: "#{current_page.start_with?('/teams') ? 'text-emerald-600 border-b-2 border-emerald-600' : 'text-gray-700 hover:text-emerald-600 hover:bg-emerald-50'} px-4 py-2 rounded-t-lg transition-all duration-200 font-medium" %>
-              <%= link_to "Attendance", attendance_path, class: "#{current_page.start_with?('/attendance') ? 'text-emerald-600 border-b-2 border-emerald-600' : 'text-gray-700 hover:text-emerald-600 hover:bg-emerald-50'} px-4 py-2 rounded-t-lg transition-all duration-200 font-medium" %>
-              <%= link_to "Hours", hours_path, class: "#{current_page.start_with?('/hours') ? 'text-emerald-600 border-b-2 border-emerald-600' : 'text-gray-700 hover:text-emerald-600 hover:bg-emerald-50'} px-4 py-2 rounded-t-lg transition-all duration-200 font-medium" %>
+              <%= link_to "Dashboard", dashboard_path, class: "cursor-pointer #{current_page.start_with?('/dashboard') || current_page == '/' ? 'text-emerald-600 border-b-2 border-emerald-600' : 'text-gray-700 hover:text-emerald-600 hover:bg-emerald-50'} px-4 py-2 rounded-t-lg transition-all duration-200 font-medium" %>
+              <%= link_to "Teams", teams_path, class: "cursor-pointer #{current_page.start_with?('/teams') ? 'text-emerald-600 border-b-2 border-emerald-600' : 'text-gray-700 hover:text-emerald-600 hover:bg-emerald-50'} px-4 py-2 rounded-t-lg transition-all duration-200 font-medium" %>
+              <%= link_to "Attendance", attendance_path, class: "cursor-pointer #{current_page.start_with?('/attendance') ? 'text-emerald-600 border-b-2 border-emerald-600' : 'text-gray-700 hover:text-emerald-600 hover:bg-emerald-50'} px-4 py-2 rounded-t-lg transition-all duration-200 font-medium" %>
+              <%= link_to "Hours", hours_path, class: "cursor-pointer #{current_page.start_with?('/hours') ? 'text-emerald-600 border-b-2 border-emerald-600' : 'text-gray-700 hover:text-emerald-600 hover:bg-emerald-50'} px-4 py-2 rounded-t-lg transition-all duration-200 font-medium" %>
             </div>
 
             <!-- Desktop Search -->
@@ -67,7 +67,7 @@
             <!-- Desktop User Menu -->
             <div class="hidden md:flex items-center space-x-2 lg:space-x-4">
               <span class="text-xs lg:text-sm text-gray-600 font-medium truncate max-w-[150px]"><%= current_user.email %></span>
-              <%= button_to "Logout", logout_path, method: :delete, class: "text-xs lg:text-sm text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 px-3 lg:px-4 py-2 rounded-lg transition-all duration-200 font-medium" %>
+              <%= button_to "Logout", logout_path, method: :delete, class: "cursor-pointer text-xs lg:text-sm text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 px-3 lg:px-4 py-2 rounded-lg transition-all duration-200 font-medium" %>
             </div>
 
             <!-- Mobile Controls -->
@@ -75,7 +75,7 @@
               <!-- Mobile Search Toggle -->
               <button type="button"
                       data-action="click->navbar#toggleSearch"
-                      class="p-2 text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-all">
+                      class="cursor-pointer p-2 text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-all">
                 <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                 </svg>
@@ -84,7 +84,7 @@
               <!-- Mobile Menu Toggle -->
               <button type="button"
                       data-action="click->navbar#toggleMenu"
-                      class="p-2 text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-all">
+                      class="cursor-pointer p-2 text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-all">
                 <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                 </svg>
@@ -121,22 +121,22 @@
               <% current_page = request.path %>
               <%= link_to "Dashboard", dashboard_path,
                   data: { action: "click->navbar#closeMenu" },
-                  class: "#{current_page.start_with?('/dashboard') || current_page == '/' ? 'bg-emerald-50 text-emerald-700 border-l-4 border-emerald-600' : 'text-gray-700 hover:bg-emerald-50 hover:text-emerald-600'} block px-4 py-3 font-medium transition-all" %>
+                  class: "cursor-pointer #{current_page.start_with?('/dashboard') || current_page == '/' ? 'bg-emerald-50 text-emerald-700 border-l-4 border-emerald-600' : 'text-gray-700 hover:bg-emerald-50 hover:text-emerald-600'} block px-4 py-3 font-medium transition-all" %>
               <%= link_to "Teams", teams_path,
                   data: { action: "click->navbar#closeMenu" },
-                  class: "#{current_page.start_with?('/teams') ? 'bg-emerald-50 text-emerald-700 border-l-4 border-emerald-600' : 'text-gray-700 hover:bg-emerald-50 hover:text-emerald-600'} block px-4 py-3 font-medium transition-all" %>
+                  class: "cursor-pointer #{current_page.start_with?('/teams') ? 'bg-emerald-50 text-emerald-700 border-l-4 border-emerald-600' : 'text-gray-700 hover:bg-emerald-50 hover:text-emerald-600'} block px-4 py-3 font-medium transition-all" %>
               <%= link_to "Attendance", attendance_path,
                   data: { action: "click->navbar#closeMenu" },
-                  class: "#{current_page.start_with?('/attendance') ? 'bg-emerald-50 text-emerald-700 border-l-4 border-emerald-600' : 'text-gray-700 hover:bg-emerald-50 hover:text-emerald-600'} block px-4 py-3 font-medium transition-all" %>
+                  class: "cursor-pointer #{current_page.start_with?('/attendance') ? 'bg-emerald-50 text-emerald-700 border-l-4 border-emerald-600' : 'text-gray-700 hover:bg-emerald-50 hover:text-emerald-600'} block px-4 py-3 font-medium transition-all" %>
               <%= link_to "Hours", hours_path,
                   data: { action: "click->navbar#closeMenu" },
-                  class: "#{current_page.start_with?('/hours') ? 'bg-emerald-50 text-emerald-700 border-l-4 border-emerald-600' : 'text-gray-700 hover:bg-emerald-50 hover:text-emerald-600'} block px-4 py-3 font-medium transition-all" %>
+                  class: "cursor-pointer #{current_page.start_with?('/hours') ? 'bg-emerald-50 text-emerald-700 border-l-4 border-emerald-600' : 'text-gray-700 hover:bg-emerald-50 hover:text-emerald-600'} block px-4 py-3 font-medium transition-all" %>
 
               <!-- Mobile User Info -->
               <div class="md:hidden border-t border-gray-200 pt-4 mt-4">
                 <div class="px-4 py-2 text-sm text-gray-600 font-medium"><%= current_user.email %></div>
                 <%= button_to "Logout", logout_path, method: :delete,
-                    class: "w-full text-left px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 font-medium transition-all rounded-lg" %>
+                    class: "cursor-pointer w-full text-left px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 font-medium transition-all rounded-lg" %>
               </div>
             </div>
           </div>
@@ -166,7 +166,7 @@
       </div>
     <% end %>
 
-    <main class="container mx-auto px-4 py-8">
+    <main class="max-w-7xl mx-auto px-4 py-8">
       <%= yield %>
     </main>
   </body>

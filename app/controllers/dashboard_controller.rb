@@ -20,21 +20,5 @@ class DashboardController < ApplicationController
     total_tracked_today = @todays_attendance.count
     present_today = @todays_attendance.where(status: :present).count
     @attendance_rate_today = total_tracked_today > 0 ? (present_today.to_f / total_tracked_today * 100).round(2) : 0
-
-    # Recent late arrivals this week
-    @recent_late_arrivals = AttendanceRecord.includes(team_member: :team)
-                                            .where(status: :late)
-                                            .where(record_date: week_start..Date.today)
-                                            .where(teams: { active: true })
-                                            .order(record_date: :desc)
-                                            .limit(10)
-
-    # Recent absences this week
-    @recent_absences = AttendanceRecord.includes(team_member: :team)
-                                       .where(status: :absent)
-                                       .where(record_date: week_start..Date.today)
-                                       .where(teams: { active: true })
-                                       .order(record_date: :desc)
-                                       .limit(10)
   end
 end

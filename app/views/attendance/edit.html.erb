@@ -2,7 +2,7 @@
   <!-- Header -->
   <div class="flex items-center justify-between">
     <h1 class="text-3xl font-bold text-gray-900">Edit Attendance Record</h1>
-    <%= link_to "Back to Attendance", attendance_path, class: "text-emerald-600 hover:text-emerald-700 font-medium" %>
+    <%= link_to "Back to Attendance", attendance_path, class: "cursor-pointer text-emerald-600 hover:text-emerald-700 font-medium" %>
   </div>
 
   <!-- Record Details -->
@@ -57,8 +57,8 @@
       </div>
 
       <div class="flex justify-end space-x-4">
-        <%= link_to "Cancel", attendance_path, class: "px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 font-medium" %>
-        <%= form.submit "Update Attendance", class: "bg-emerald-600 text-white px-4 py-2 rounded-md hover:bg-emerald-700 font-medium" %>
+        <%= link_to "Cancel", attendance_path, class: "cursor-pointer px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 font-medium" %>
+        <%= form.submit "Update Attendance", class: "cursor-pointer bg-emerald-600 text-white px-4 py-2 rounded-md hover:bg-emerald-700 font-medium" %>
       </div>
     <% end %>
   </div>

@@ -9,13 +9,13 @@
       <% end %>
     </div>
     <div class="flex space-x-3">
-      <%= link_to "Edit Team", edit_team_path(@team), class: "bg-emerald-600 text-white px-4 py-2 rounded-md hover:bg-emerald-700 font-medium" %>
+      <%= link_to "Edit Team", edit_team_path(@team), class: "cursor-pointer bg-emerald-600 text-white px-4 py-2 rounded-md hover:bg-emerald-700 font-medium" %>
       <% if @team.active? %>
-        <%= button_to "Archive", archive_team_path(@team), method: :patch, form: { data: { turbo_confirm: "Archive this team?" } }, class: "bg-yellow-600 text-white px-4 py-2 rounded-md hover:bg-yellow-700 font-medium" %>
+        <%= button_to "Archive", archive_team_path(@team), method: :patch, form: { data: { turbo_confirm: "Archive this team?" } }, class: "cursor-pointer bg-yellow-600 text-white px-4 py-2 rounded-md hover:bg-yellow-700 font-medium" %>
       <% else %>
-        <%= button_to "Activate", activate_team_path(@team), method: :patch, class: "bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 font-medium" %>
+        <%= button_to "Activate", activate_team_path(@team), method: :patch, class: "cursor-pointer bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 font-medium" %>
       <% end %>
-      <%= link_to "Back to Teams", teams_path, class: "bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 font-medium" %>
+      <%= link_to "Back to Teams", teams_path, class: "cursor-pointer bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 font-medium" %>
     </div>
   </div>
 
@@ -47,7 +47,7 @@
   <div class="bg-white rounded-lg shadow">
     <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
       <h2 class="text-xl font-semibold text-gray-900">Team Members</h2>
-      <%= link_to "Add Member", new_team_team_member_path(@team), class: "bg-green-600 text-white px-3 py-2 rounded-md hover:bg-green-700 text-sm font-medium" %>
+      <%= link_to "Add Member", new_team_team_member_path(@team), class: "cursor-pointer bg-green-600 text-white px-3 py-2 rounded-md hover:bg-green-700 text-sm font-medium" %>
     </div>
     <div class="p-6">
       <% if @team_members.any? %>
@@ -69,22 +69,22 @@
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600"><%= member.role %></td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                     <% if member.email.present? %>
-                      <%= link_to member.email, "mailto:#{member.email}", class: "text-emerald-600 hover:text-emerald-700" %>
+                      <%= link_to member.email, "mailto:#{member.email}", class: "cursor-pointer text-emerald-600 hover:text-emerald-700" %>
                     <% else %>
                       <span class="text-gray-400">-</span>
                     <% end %>
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                     <% if member.phone.present? %>
-                      <%= link_to member.phone, "tel:#{member.phone}", class: "text-emerald-600 hover:text-emerald-700" %>
+                      <%= link_to member.phone, "tel:#{member.phone}", class: "cursor-pointer text-emerald-600 hover:text-emerald-700" %>
                     <% else %>
                       <span class="text-gray-400">-</span>
                     <% end %>
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <div class="flex items-center space-x-2">
-                      <%= link_to "Edit", edit_team_team_member_path(@team, member), class: "text-emerald-600 hover:text-emerald-700" %>
-                      <%= button_to "Delete", team_team_member_path(@team, member), method: :delete, form: { data: { turbo_confirm: "Remove this member?" }, class: "inline" }, class: "text-red-600 hover:text-red-700" %>
+                      <%= link_to "Edit", edit_team_team_member_path(@team, member), class: "cursor-pointer text-emerald-600 hover:text-emerald-700" %>
+                      <%= button_to "Delete", team_team_member_path(@team, member), method: :delete, form: { data: { turbo_confirm: "Remove this member?" }, class: "inline" }, class: "cursor-pointer text-red-600 hover:text-red-700" %>
                     </div>
                   </td>
                 </tr>
@@ -95,7 +95,7 @@
       <% else %>
         <div class="text-center py-12">
           <p class="text-gray-500 text-lg mb-4">No team members yet</p>
-          <%= link_to "Add first member", new_team_team_member_path(@team), class: "text-emerald-600 hover:text-emerald-700 font-medium" %>
+          <%= link_to "Add first member", new_team_team_member_path(@team), class: "cursor-pointer text-emerald-600 hover:text-emerald-700 font-medium" %>
         </div>
       <% end %>
     </div>

@@ -40,13 +40,13 @@
             <strong class="text-emerald-700"><%= @date.strftime('%A, %B %d, %Y') %></strong>
           </div>
           <div class="flex space-x-2">
-            <%= link_to attendance_quick_entry_path(date: @date - 1.day, team_id: @team_filter), class: "text-emerald-600 hover:text-emerald-700 font-medium flex items-center gap-1" do %>
+            <%= link_to attendance_quick_entry_path(date: @date - 1.day, team_id: @team_filter), class: "cursor-pointer text-emerald-600 hover:text-emerald-700 font-medium flex items-center gap-1" do %>
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
               </svg>
               Previous Day
             <% end %>
-            <%= link_to attendance_quick_entry_path(date: @date + 1.day, team_id: @team_filter), class: "text-emerald-600 hover:text-emerald-700 font-medium flex items-center gap-1" do %>
+            <%= link_to attendance_quick_entry_path(date: @date + 1.day, team_id: @team_filter), class: "cursor-pointer text-emerald-600 hover:text-emerald-700 font-medium flex items-center gap-1" do %>
               Next Day
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -122,15 +122,15 @@
             <strong><%= @teams.sum { |t| t.team_members.count } %></strong> total team members
           </div>
           <div class="flex space-x-3">
-            <%= form.submit "Save Attendance", class: "bg-emerald-600 text-white px-4 py-2 rounded-md hover:bg-emerald-700 font-medium" %>
-            <%= link_to "Cancel", attendance_path, class: "bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 font-medium" %>
+            <%= form.submit "Save Attendance", class: "cursor-pointer bg-emerald-600 text-white px-4 py-2 rounded-md hover:bg-emerald-700 font-medium" %>
+            <%= link_to "Cancel", attendance_path, class: "cursor-pointer bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 font-medium" %>
           </div>
         </div>
         <% end %>
       <% else %>
         <div class="p-12 text-center">
           <p class="text-gray-500 text-lg mb-4">No active teams with members to mark attendance for</p>
-          <%= link_to "Create a team", new_team_path, class: "text-emerald-600 hover:text-emerald-700 font-medium" %>
+          <%= link_to "Create a team", new_team_path, class: "cursor-pointer text-emerald-600 hover:text-emerald-700 font-medium" %>
         </div>
       <% end %>
     </div>
