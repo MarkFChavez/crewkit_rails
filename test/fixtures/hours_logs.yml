@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  team_member: one
+  log_date: 2025-11-19
+  hours: 9.99
+  deliverable_notes: MyText
+
+two:
+  team_member: two
+  log_date: 2025-11-19
+  hours: 9.99
+  deliverable_notes: MyText
