@@ -20,5 +20,34 @@ class DashboardController < ApplicationController
     total_tracked_today = @todays_attendance.count
     present_today = @todays_attendance.where(status: :present).count
     @attendance_rate_today = total_tracked_today > 0 ? (present_today.to_f / total_tracked_today * 100).round(2) : 0
+
+    # Weekly attendance data for chart (last 7 days)
+    @weekly_attendance_data = prepare_weekly_attendance_data
+  end
+
+  private
+
+  def prepare_weekly_attendance_data
+    dates = (6.days.ago.to_date..Date.today).to_a
+
+    data = dates.map do |date|
+      attendance = AttendanceRecord.joins(team_member: :team)
+                                   .where(record_date: date)
+                                   .where(teams: { active: true })
+
+      {
+        date: date.strftime('%a'), # Mon, Tue, Wed, etc.
+        present: attendance.where(status: :present).count,
+        absent: attendance.where(status: :absent).count,
+        late: attendance.where(status: :late).count
+      }
+    end
+
+    {
+      labels: data.map { |d| d[:date] },
+      present: data.map { |d| d[:present] },
+      absent: data.map { |d| d[:absent] },
+      late: data.map { |d| d[:late] }
+    }
   end
 end
