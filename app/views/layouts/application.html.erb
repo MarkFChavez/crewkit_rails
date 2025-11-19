@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "CrewKit" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="bg-gradient-to-br from-gray-50 to-emerald-50/30 min-h-screen">
+    <% if logged_in? %>
+      <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md shadow-lg shadow-emerald-100/50 border-b border-emerald-100"
+           data-controller="navbar"
+           data-action="click@window->navbar#handleClickOutside">
+        <div class="container mx-auto px-4">
+          <div class="flex justify-between items-center h-16">
+            <!-- Logo -->
+            <div class="flex items-center">
+              <%= link_to root_path, class: "text-lg md:text-xl font-bold bg-gradient-to-r from-emerald-600 to-emerald-500 bg-clip-text text-transparent hover:from-emerald-700 hover:to-emerald-600 transition-all duration-300" do %>
+                <span class="hidden sm:inline">CrewKit</span>
+                <span class="sm:hidden">CK</span>
+              <% end %>
+            </div>
+
+            <!-- Desktop Navigation Links -->
+            <div class="hidden lg:flex space-x-1">
+              <% current_page = request.path %>
+              <%= link_to "Dashboard", dashboard_path, class: "#{current_page.start_with?('/dashboard') || current_page == '/' ? 'text-emerald-600 border-b-2 border-emerald-600' : 'text-gray-700 hover:text-emerald-600 hover:bg-emerald-50'} px-4 py-2 rounded-t-lg transition-all duration-200 font-medium" %>
+              <%= link_to "Teams", teams_path, class: "#{current_page.start_with?('/teams') ? 'text-emerald-600 border-b-2 border-emerald-600' : 'text-gray-700 hover:text-emerald-600 hover:bg-emerald-50'} px-4 py-2 rounded-t-lg transition-all duration-200 font-medium" %>
+              <%= link_to "Attendance", attendance_path, class: "#{current_page.start_with?('/attendance') ? 'text-emerald-600 border-b-2 border-emerald-600' : 'text-gray-700 hover:text-emerald-600 hover:bg-emerald-50'} px-4 py-2 rounded-t-lg transition-all duration-200 font-medium" %>
+              <%= link_to "Hours", hours_path, class: "#{current_page.start_with?('/hours') ? 'text-emerald-600 border-b-2 border-emerald-600' : 'text-gray-700 hover:text-emerald-600 hover:bg-emerald-50'} px-4 py-2 rounded-t-lg transition-all duration-200 font-medium" %>
+            </div>
+
+            <!-- Desktop Search -->
+            <div class="flex-1 max-w-md mx-4 hidden lg:block"
+                 data-controller="search"
+                 data-search-url-value="<%= search_team_members_path %>"
+                 data-action="click@window->search#handleClickOutside keydown@window->search#handleEscape">
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                  </svg>
+                </div>
+                <input type="text"
+                       data-search-target="input"
+                       data-action="input->search#search"
+                       placeholder="Search employees..."
+                       class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200 text-sm bg-white">
+                <div data-search-target="results"
+                     class="hidden absolute mt-2 w-full bg-white rounded-lg shadow-xl border border-gray-200 max-h-96 overflow-y-auto z-50">
+                </div>
+              </div>
+            </div>
+
+            <!-- Desktop User Menu -->
+            <div class="hidden md:flex items-center space-x-2 lg:space-x-4">
+              <span class="text-xs lg:text-sm text-gray-600 font-medium truncate max-w-[150px]"><%= current_user.email %></span>
+              <%= button_to "Logout", logout_path, method: :delete, class: "text-xs lg:text-sm text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 px-3 lg:px-4 py-2 rounded-lg transition-all duration-200 font-medium" %>
+            </div>
+
+            <!-- Mobile Controls -->
+            <div class="flex items-center space-x-2 lg:hidden">
+              <!-- Mobile Search Toggle -->
+              <button type="button"
+                      data-action="click->navbar#toggleSearch"
+                      class="p-2 text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-all">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                </svg>
+              </button>
+
+              <!-- Mobile Menu Toggle -->
+              <button type="button"
+                      data-action="click->navbar#toggleMenu"
+                      class="p-2 text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-all">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Mobile Search Bar -->
+          <div data-navbar-target="mobileSearch"
+               class="hidden pb-4 lg:hidden"
+               data-controller="search"
+               data-search-url-value="<%= search_team_members_path %>"
+               data-action="click@window->search#handleClickOutside keydown@window->search#handleEscape">
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                </svg>
+              </div>
+              <input type="text"
+                     data-search-target="input"
+                     data-action="input->search#search"
+                     placeholder="Search employees..."
+                     class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200 text-sm bg-white">
+              <div data-search-target="results"
+                   class="hidden absolute mt-2 w-full bg-white rounded-lg shadow-xl border border-gray-200 max-h-96 overflow-y-auto z-50">
+              </div>
+            </div>
+          </div>
+
+          <!-- Mobile Menu -->
+          <div data-navbar-target="mobileMenu" class="hidden lg:hidden pb-4">
+            <div class="space-y-1">
+              <% current_page = request.path %>
+              <%= link_to "Dashboard", dashboard_path,
+                  data: { action: "click->navbar#closeMenu" },
+                  class: "#{current_page.start_with?('/dashboard') || current_page == '/' ? 'bg-emerald-50 text-emerald-700 border-l-4 border-emerald-600' : 'text-gray-700 hover:bg-emerald-50 hover:text-emerald-600'} block px-4 py-3 font-medium transition-all" %>
+              <%= link_to "Teams", teams_path,
+                  data: { action: "click->navbar#closeMenu" },
+                  class: "#{current_page.start_with?('/teams') ? 'bg-emerald-50 text-emerald-700 border-l-4 border-emerald-600' : 'text-gray-700 hover:bg-emerald-50 hover:text-emerald-600'} block px-4 py-3 font-medium transition-all" %>
+              <%= link_to "Attendance", attendance_path,
+                  data: { action: "click->navbar#closeMenu" },
+                  class: "#{current_page.start_with?('/attendance') ? 'bg-emerald-50 text-emerald-700 border-l-4 border-emerald-600' : 'text-gray-700 hover:bg-emerald-50 hover:text-emerald-600'} block px-4 py-3 font-medium transition-all" %>
+              <%= link_to "Hours", hours_path,
+                  data: { action: "click->navbar#closeMenu" },
+                  class: "#{current_page.start_with?('/hours') ? 'bg-emerald-50 text-emerald-700 border-l-4 border-emerald-600' : 'text-gray-700 hover:bg-emerald-50 hover:text-emerald-600'} block px-4 py-3 font-medium transition-all" %>
+
+              <!-- Mobile User Info -->
+              <div class="md:hidden border-t border-gray-200 pt-4 mt-4">
+                <div class="px-4 py-2 text-sm text-gray-600 font-medium"><%= current_user.email %></div>
+                <%= button_to "Logout", logout_path, method: :delete,
+                    class: "w-full text-left px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 font-medium transition-all rounded-lg" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    <% end %>
+
+    <% if flash[:notice] %>
+      <div class="bg-emerald-50 border-l-4 border-emerald-500 p-4 my-4 container mx-auto rounded-r-lg shadow-lg shadow-emerald-100/50 animate-fade-in">
+        <div class="flex items-center">
+          <svg class="w-5 h-5 text-emerald-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+          </svg>
+          <p class="text-emerald-700 font-medium"><%= flash[:notice] %></p>
+        </div>
+      </div>
+    <% end %>
+
+    <% if flash[:alert] %>
+      <div class="bg-red-50 border-l-4 border-red-500 p-4 my-4 container mx-auto rounded-r-lg shadow-lg shadow-red-100/50 animate-fade-in">
+        <div class="flex items-center">
+          <svg class="w-5 h-5 text-red-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+          </svg>
+          <p class="text-red-700 font-medium"><%= flash[:alert] %></p>
+        </div>
+      </div>
+    <% end %>
+
+    <main class="container mx-auto px-4 py-8">
+      <%= yield %>
+    </main>
+  </body>
+</html>
